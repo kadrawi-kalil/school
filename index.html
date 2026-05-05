@@ -1,478 +1,1009 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سجل التقويم الذاتي المدرسي - مدارس الصالحية الأهلية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سجل التقويم الذاتي المدرسي - مدارس النصر الأهلية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        :root {
-            --primary-color: #1a365d; 
-            --secondary-color: #d4af37; 
-            --bg-color: #f7fafc;
-            --card-bg: #ffffff;
-            --text-main: #2d3748;
-            --text-light: #718096;
-            --border-color: #e2e8f0;
-        }
+      :root {
+        --primary-color: #1a365d;
+        --secondary-color: #d4af37;
+        --bg-color: #f7fafc;
+        --card-bg: #ffffff;
+        --text-main: #2d3748;
+        --text-light: #718096;
+        --border-color: #e2e8f0;
+      }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', sans-serif;
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Tajawal", sans-serif;
+      }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-        }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        display: flex;
+      }
 
-        /* Sidebar */
+      /* Sidebar */
+      .sidebar {
+        width: 280px;
+        background: var(--primary-color);
+        color: white;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .brand {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .brand img {
+        width: 120px;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        background: white;
+        padding: 5px;
+      }
+
+      .brand h2 {
+        font-size: 1.1rem;
+        color: var(--secondary-color);
+        line-height: 1.5;
+      }
+
+      .nav-links {
+        list-style: none;
+        padding: 1rem 0;
+      }
+      .nav-links li a {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        color: #cbd5e0;
+        text-decoration: none;
+        transition: 0.3s;
+        font-weight: 500;
+      }
+      .nav-links li a i {
+        margin-left: 15px;
+        width: 20px;
+        text-align: center;
+      }
+      .nav-links li a:hover,
+      .nav-links li a.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--secondary-color);
+        border-left: 4px solid var(--secondary-color);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        margin-right: 280px;
+        padding: 2rem;
+        background-color: var(--bg-color);
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .header-title {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .header-title img {
+        width: 80px;
+        border-radius: 8px;
+      }
+      .header-title h1 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        font-weight: 800;
+      }
+      .header-title p {
+        color: var(--text-light);
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .year-badge {
+        background: var(--secondary-color);
+        color: var(--primary-color);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+      }
+
+      .section-container {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        border: 1px solid var(--border-color);
+      }
+
+      .section-title {
+        color: var(--primary-color);
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 0.5rem;
+      }
+      .section-title i {
+        color: var(--secondary-color);
+        margin-left: 10px;
+      }
+
+      /* Tables */
+      .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      .custom-table th,
+      .custom-table td {
+        padding: 0.8rem;
+        text-align: right;
+        border: 1px solid var(--border-color);
+        vertical-align: middle;
+      }
+      .custom-table th {
+        background: var(--primary-color);
+        color: white;
+        font-weight: 600;
+      }
+      .custom-table tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+
+      .editable-cell {
+        padding: 8px;
+        border: 1px dashed #cbd5e0;
+        border-radius: 5px;
+        background: #fff;
+        transition: 0.3s;
+        min-height: 20px;
+      }
+      .editable-cell:focus {
+        border-color: var(--secondary-color);
+        outline: none;
+        background: #fffcf0;
+      }
+
+      .sign-btn {
+        background: #edf2f7;
+        border: 1px solid #cbd5e0;
+        color: var(--primary-color);
+        padding: 6px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: inherit;
+        transition: 0.3s;
+      }
+      .sign-btn:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+      .sign-btn.signed {
+        background: #c6f6d5;
+        color: #22543d;
+        border-color: #9ae6b4;
+      }
+
+      .status-select {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-family: inherit;
+        background: white;
+      }
+
+      /* Document Blocks */
+      .doc-block {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-right: 4px solid var(--secondary-color);
+        margin-bottom: 1.5rem;
+        border-radius: 5px;
+      }
+      .doc-block h4 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+      .doc-block p,
+      .doc-block li {
+        line-height: 1.6;
+        color: var(--text-main);
+        font-size: 0.95rem;
+      }
+
+      @media print {
         .sidebar {
-            width: 280px;
-            background: var(--primary-color);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: -4px 0 10px rgba(0,0,0,0.1);
-            z-index: 100;
+          display: none;
         }
-
-        .brand {
-            padding: 2rem 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .brand img {
-            width: 120px;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            background: white;
-            padding: 5px;
-        }
-
-        .brand h2 {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            line-height: 1.5;
-        }
-
-        .nav-links { list-style: none; padding: 1rem 0; }
-        .nav-links li a {
-            display: flex; align-items: center; padding: 1rem 1.5rem;
-            color: #cbd5e0; text-decoration: none; transition: 0.3s; font-weight: 500;
-        }
-        .nav-links li a i { margin-left: 15px; width: 20px; text-align: center; }
-        .nav-links li a:hover, .nav-links li a.active {
-            background: rgba(255,255,255,0.1); color: var(--secondary-color);
-            border-left: 4px solid var(--secondary-color);
-        }
-
-        /* Main Content */
         .main-content {
-            flex: 1;
-            margin-right: 280px;
-            padding: 2rem;
-            background-color: var(--bg-color);
+          margin-right: 0;
+          padding: 0;
         }
-
-        .header-top {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border-color);
-        }
-
-        .header-title { display: flex; align-items: center; gap: 20px; }
-        .header-title img { width: 80px; border-radius: 8px; }
-        .header-title h1 { color: var(--primary-color); font-size: 1.8rem; font-weight: 800; }
-        .header-title p { color: var(--text-light); font-size: 1rem; margin-top: 0.5rem; }
-
-        .year-badge {
-            background: var(--secondary-color); color: var(--primary-color);
-            padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 700;
-        }
-
         .section-container {
-            background: var(--card-bg); border-radius: 10px; padding: 2rem;
-            margin-bottom: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
+          page-break-inside: avoid;
+          border: none;
+          box-shadow: none;
         }
-
-        .section-title {
-            color: var(--primary-color); font-size: 1.4rem; margin-bottom: 1.5rem;
-            display: flex; align-items: center; border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
-        .section-title i { color: var(--secondary-color); margin-left: 10px; }
-
-        /* Tables */
-        .custom-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        .custom-table th, .custom-table td {
-            padding: 0.8rem; text-align: right; border: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-        .custom-table th { background: var(--primary-color); color: white; font-weight: 600; }
-        .custom-table tr:nth-child(even) { background-color: #f8fafc; }
-        
-        .editable-cell {
-            padding: 8px; border: 1px dashed #cbd5e0; border-radius: 5px;
-            background: #fff; transition: 0.3s; min-height: 20px;
-        }
-        .editable-cell:focus { border-color: var(--secondary-color); outline: none; background: #fffcf0; }
-
         .sign-btn {
-            background: #edf2f7; border: 1px solid #cbd5e0; color: var(--primary-color);
-            padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: 600;
-            display: inline-flex; align-items: center; gap: 8px; font-family: inherit; transition: 0.3s;
+          display: none;
         }
-        .sign-btn:hover { background: var(--primary-color); color: white; }
-        .sign-btn.signed { background: #c6f6d5; color: #22543d; border-color: #9ae6b4; }
-
-        .status-select {
-            width: 100%; padding: 6px; border: 1px solid var(--border-color);
-            border-radius: 5px; font-family: inherit; background: white;
+        .editable-cell {
+          border: none;
+          background: transparent;
         }
-
-        /* Document Blocks */
-        .doc-block {
-            background: #f8fafc; padding: 1.5rem; border-right: 4px solid var(--secondary-color);
-            margin-bottom: 1.5rem; border-radius: 5px;
-        }
-        .doc-block h4 { color: var(--primary-color); margin-bottom: 10px; }
-        .doc-block p, .doc-block li { line-height: 1.6; color: var(--text-main); font-size: 0.95rem; }
-        
-        @media print {
-            .sidebar { display: none; }
-            .main-content { margin-right: 0; padding: 0; }
-            .section-container { page-break-inside: avoid; border: none; box-shadow: none; }
-            .sign-btn { display: none; }
-            .editable-cell { border: none; background: transparent; }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- Sidebar -->
     <nav class="sidebar">
-        <div class="brand">
-            <img src="data:image/jpeg;base64,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" alt="شعار مدارس الصالحية الأهلية">
-            <h2>إدارة مدارس الصالحية الأهلية للبنات</h2>
-            <p style="font-size: 0.85rem; color: #cbd5e0; margin-top:5px;">سجل التقويم الذاتي</p>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#team" class="active"><i class="fas fa-users"></i> فريق التقويم والاجتماعات</a></li>
-            <li><a href="#tasks"><i class="fas fa-tasks"></i> خطابات وتكليفات المهام</a></li>
-            <li><a href="#plan"><i class="fas fa-calendar-alt"></i> خطة العمل الإجرائية</a></li>
-            <li><a href="#evidences"><i class="fas fa-folder-open"></i> الشواهد والسجلات المطلوبة</a></li>
-            <li><a href="#analysis"><i class="fas fa-file-alt"></i> سجل تحليل الوثائق</a></li>
-        </ul>
+      <div class="brand">
+        <img src="logo.png" alt="شعار مدارس الصالحية الأهلية" />
+        <h2>إدارة مدارس النصر الأهلية</h2>
+        <p style="font-size: 0.85rem; color: #cbd5e0; margin-top: 5px">
+          سجل التقويم الذاتي
+        </p>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#team" class="active"
+            ><i class="fas fa-users"></i> فريق التقويم والاجتماعات</a
+          >
+        </li>
+        <li>
+          <a href="#tasks"
+            ><i class="fas fa-tasks"></i> خطابات وتكليفات المهام</a
+          >
+        </li>
+        <li>
+          <a href="#plan"
+            ><i class="fas fa-calendar-alt"></i> خطة العمل الإجرائية</a
+          >
+        </li>
+        <li>
+          <a href="#evidences"
+            ><i class="fas fa-folder-open"></i> الشواهد والسجلات المطلوبة</a
+          >
+        </li>
+        <li>
+          <a href="#analysis"
+            ><i class="fas fa-file-alt"></i> سجل تحليل الوثائق</a
+          >
+        </li>
+      </ul>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
-        
-        <header class="header-top">
-            <div class="header-title">
-                <img src="data:image/jpeg;base64,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" alt="الشعار">
-                <div>
-                    <h1>سجل التقويم الذاتي المدرسي</h1>
-                    <p>هيئة تقويم التعليم والتدريب - إدارة المدرسة</p>
+      <header class="header-top">
+        <div class="header-title">
+          <img src="logo.png" alt="الشعار" />
+          <div>
+            <h1>سجل التقويم الذاتي المدرسي</h1>
+            <p>هيئة تقويم التعليم والتدريب - إدارة المدرسة</p>
+          </div>
+        </div>
+        <div class="year-badge">العام الدراسي ١٤٤٧ / ١٤٤٨ هـ</div>
+      </header>
+
+      <!-- Section 1: Team & Meetings -->
+      <section class="section-container" id="team">
+        <h2 class="section-title">
+          <i class="fas fa-users-cog"></i> تشكيل فريق التقويم الذاتي
+        </h2>
+        <p style="margin-bottom: 1rem">
+          بناءً على الصلاحيات الممنوحة للإدارة، تقرر تشكيل أعضاء فريق التقويم
+          وتحديد مهامهن كالتالي (يمكن تعديل الأسماء والنقر للتوقيع):
+        </p>
+
+        <table class="custom-table" style="margin-bottom: 2rem">
+          <thead>
+            <tr>
+              <th>م</th>
+              <th style="width: 35%">الاسم (قابل للتعديل)</th>
+              <th>الوظيفة</th>
+              <th>المهمة</th>
+              <th>التوقيع الإلكتروني</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  ----------------------------------
                 </div>
-            </div>
-            <div class="year-badge">العام الدراسي ١٤٤٧ / ١٤٤٨ هـ</div>
-        </header>
+              </td>
+              <td>مدير المدرسة</td>
+              <td>رئيساً</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  ----------------------------------
+                </div>
+              </td>
+              <td>وكيل شؤون تعليمية</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  علياء حسن الزهراني
+                </div>
+              </td>
+              <td>وكيلة شؤون مدرسية وطالبات</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  صالحة محمد الزهراني
+                </div>
+              </td>
+              <td>موجهة طلابية</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  فاطمة محمد العسيري
+                </div>
+              </td>
+              <td>رائدة نشاط</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  نافعة حمد الحربي
+                </div>
+              </td>
+              <td>معلمة متميزة</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  ابتسام حاجي البوعبدي
+                </div>
+              </td>
+              <td>معلمة متميزة</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  عواطف عوده الذبياني
+                </div>
+              </td>
+              <td>معلمة متميزة</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  سارة مذحل البقمي
+                </div>
+              </td>
+              <td>معلمة متميزة</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>
+                <div class="editable-cell" contenteditable="true">
+                  هيلة محمد الزهراني
+                </div>
+              </td>
+              <td>مساعد إداري مميز</td>
+              <td>عضو</td>
+              <td>
+                <button class="sign-btn" onclick="toggleSign(this)">
+                  <i class="fas fa-pen-nib"></i> توقيع
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <!-- Section 1: Team & Meetings -->
-        <section class="section-container" id="team">
-            <h2 class="section-title"><i class="fas fa-users-cog"></i> تشكيل فريق التقويم الذاتي</h2>
-            <p style="margin-bottom: 1rem;">بناءً على الصلاحيات الممنوحة للإدارة، تقرر تشكيل أعضاء فريق التقويم وتحديد مهامهن كالتالي (يمكن تعديل الأسماء والنقر للتوقيع):</p>
-            
-            <table class="custom-table" style="margin-bottom: 2rem;">
-                <thead>
-                    <tr>
-                        <th>م</th>
-                        <th style="width: 35%;">الاسم (قابل للتعديل)</th>
-                        <th>الوظيفة</th>
-                        <th>المهمة</th>
-                        <th>التوقيع الإلكتروني</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1</td><td><div class="editable-cell" contenteditable="true">فاطمة بنت عبدالله ظافر الأسمري</div></td><td>مديرة المدرسة</td><td>رئيساً</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>2</td><td><div class="editable-cell" contenteditable="true">فتحية علي عبدالباقي</div></td><td>وكيلة شؤون تعليمية</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>3</td><td><div class="editable-cell" contenteditable="true">علياء حسن الزهراني</div></td><td>وكيلة شؤون مدرسية وطالبات</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>4</td><td><div class="editable-cell" contenteditable="true">صالحة محمد الزهراني</div></td><td>موجهة طلابية</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>5</td><td><div class="editable-cell" contenteditable="true">فاطمة محمد العسيري</div></td><td>رائدة نشاط</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>6</td><td><div class="editable-cell" contenteditable="true">نافعة حمد الحربي</div></td><td>معلمة متميزة</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>7</td><td><div class="editable-cell" contenteditable="true">ابتسام حاجي البوعبدي</div></td><td>معلمة متميزة</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>8</td><td><div class="editable-cell" contenteditable="true">عواطف عوده الذبياني</div></td><td>معلمة متميزة</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>9</td><td><div class="editable-cell" contenteditable="true">سارة مذحل البقمي</div></td><td>معلمة متميزة</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                    <tr><td>10</td><td><div class="editable-cell" contenteditable="true">هيلة محمد الزهراني</div></td><td>مساعد إداري مميز</td><td>عضو</td><td><button class="sign-btn" onclick="toggleSign(this)"><i class="fas fa-pen-nib"></i> توقيع</button></td></tr>
-                </tbody>
-            </table>
+        <h3 style="color: var(--primary-color); margin-bottom: 1rem">
+          <i class="fas fa-handshake"></i> محاضر الاجتماعات
+        </h3>
 
-            <h3 style="color: var(--primary-color); margin-bottom: 1rem;"><i class="fas fa-handshake"></i> محاضر الاجتماعات</h3>
-            
-            <div class="doc-block">
-                <h4>اجتماع تكليف فريق التقويم المدرسي</h4>
-                <p><strong>جدول الأعمال:</strong> شرح معنى الاعتماد المدرسي والتقويم الذاتي الخارجي، أهداف الاعتماد المدرسي، متطلبات التقويم، نشر الاستبانات الإلكترونية.</p>
-                <p><strong>التوصيات:</strong> الاطلاع على الدليل الإجرائي، تكليف فريق العمل وتوزيع المهام، نشر ثقافة التقويم الذاتي بين منسوبات المدرسة والمجتمع المحلي.</p>
-            </div>
-
-            <div class="doc-block">
-                <h4>اجتماع الخطة التحسينية</h4>
-                <p><strong>جدول الأعمال:</strong> قراءة التقرير بتمعن ومراجعة النتائج، وضع خطط لمعالجة أولويات التحسين التي أظهرتها نتائج التقويم.</p>
-                <p><strong>التوصيات:</strong> إعداد جدول التحسين وفقاً لنتائج التقويم والاعتماد، متابعة تطوير خطة التحسين في ضوء نتائج التقويم الذاتي وتحديد الأولويات.</p>
-            </div>
-        </section>
-
-        <!-- Section 2: Tasks & Assignments -->
-        <section class="section-container" id="tasks">
-            <h2 class="section-title"><i class="fas fa-clipboard-list"></i> خطابات التكليف وأدوات التقويم</h2>
-            
-            <div class="doc-block">
-                <h4>1. تكليف بإجراء الاستبانات</h4>
-                <p><strong>المكلفة:</strong> <span class="editable-cell" contenteditable="true" style="display:inline-block; min-width:200px;">أ. سارة مذحل البقمي</span></p>
-                <ul>
-                    <li>تفعيل أداة الاستبانات في المنصة ونسخ الروابط وإرسالها للمعلمات، والطالبات، وأولياء الأمور.</li>
-                    <li>حث المستفيدات على الالتزام بالشفافية والصدق وتوضيح سرية الأسماء.</li>
-                    <li>إغلاق الأداة وطباعة الرسوم البيانية.</li>
-                </ul>
-            </div>
-
-            <div class="doc-block">
-                <h4>2. تكليف بأداة الملاحظة الصفية</h4>
-                <p><strong>المكلفات:</strong> <span class="editable-cell" contenteditable="true" style="display:inline-block; min-width:300px;">أ. ابتسام البوعبدي، أ. نافعة الحربي، أ. عواطف الذبياني، أ. سارة البقمي</span></p>
-                <ul>
-                    <li>الالتزام بحضور الحصة كاملة وعدم الاكتفاء بجزء منها.</li>
-                    <li>التركيز على توفير فرص تعلم متكافئة للطالبات بجميع فئاتهن.</li>
-                    <li>ملاحظة جودة التغذية الراجعة وأنواع استراتيجيات التعليم.</li>
-                </ul>
-            </div>
-
-            <div class="doc-block">
-                <h4>3. تكليف بملاحظة البيئة المدرسية</h4>
-                <p><strong>المكلفة:</strong> <span class="editable-cell" contenteditable="true" style="display:inline-block; min-width:200px;">أ. عواطف عودة الذبياني</span></p>
-                <ul>
-                    <li>جمع البيانات حول جودة عناصر البيئة المدرسية المادية.</li>
-                    <li>التأكد من توافر وسائل الأمن والسلامة، تنظيم الفصول، والمقصف المدرسي.</li>
-                </ul>
-            </div>
-
-            <div class="doc-block">
-                <h4>4. تكليف بإجراء المقابلات وتحليل الوثائق</h4>
-                <p><strong>المكلفات:</strong> <span class="editable-cell" contenteditable="true" style="display:inline-block; min-width:300px;">أ. ابتسام البوعبدي، أ. نافعة الحربي، أ. عواطف الذبياني، أ. سارة البقمي</span></p>
-                <ul>
-                    <li>إجراء المقابلات مع (المديرة، الموجهة الطلابية، المعلمات، الطالبات) لإدارة وقت المقابلات وتدوين الإجابات.</li>
-                    <li>الاطلاع على الوثائق الأساسية (الخطة التشغيلية، خطط التطوير المهني، خطة الأمن والسلامة، عينة من ملفات الإنجاز).</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 3: Action Plan -->
-        <section class="section-container" id="plan">
-            <h2 class="section-title"><i class="fas fa-calendar-check"></i> خطة العمل الإجرائية في تنفيذ التقويم</h2>
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>المهام والإجراءات</th>
-                        <th>الجهة المنفذة</th>
-                        <th>حالة التنفيذ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>الاطلاع على أدلة التقويم وعقد الاجتماع الأول وتوزيع المهام</td>
-                        <td>إدارة المدرسة وفريق التقويم</td>
-                        <td>
-                            <select class="status-select">
-                                <option value="نفذ" selected>نفذ</option>
-                                <option value="لم ينفذ">لم ينفذ</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>التوعية ونشر ثقافة التقويم الذاتي (لقاء المعلمات والطالبات وأولياء الأمور)</td>
-                        <td>مديرة المدرسة والوكيلات</td>
-                        <td>
-                            <select class="status-select">
-                                <option value="نفذ" selected>نفذ</option>
-                                <option value="لم ينفذ">لم ينفذ</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>التسجيل في المنصة وإدراج فريق التقويم وإرسال الطلب</td>
-                        <td>مديرة المدرسة</td>
-                        <td>
-                            <select class="status-select">
-                                <option value="نفذ" selected>نفذ</option>
-                                <option value="لم ينفذ">لم ينفذ</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>تفعيل أداة الاستبانات، الملاحظة الصفية، والبيئة المدرسية والمقابلات</td>
-                        <td>عضوات الفريق المكلفات</td>
-                        <td>
-                            <select class="status-select">
-                                <option value="نفذ" selected>نفذ</option>
-                                <option value="لم ينفذ">لم ينفذ</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>إغلاق التقويم الذاتي في المنصة</td>
-                        <td>مديرة المدرسة</td>
-                        <td>
-                            <select class="status-select">
-                                <option value="نفذ" selected>نفذ</option>
-                                <option value="لم ينفذ">لم ينفذ</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- Section 4: Evidences by Role -->
-        <section class="section-container" id="evidences">
-            <h2 class="section-title"><i class="fas fa-folder-open"></i> الشواهد المطلوبة من فريق التقويم (حسب الوصف الوظيفي)</h2>
-            
-            <h3 style="margin-top:1rem; color:var(--primary-color);">1. وثائق مطلوبة من مديرة المدرسة</h3>
-            <table class="custom-table">
-                <thead><tr><th>الشواهد المطلوبة</th><th>محك التنفيذ</th></tr></thead>
-                <tbody>
-                    <tr><td>سجل الخطة التشغيلية وتطويرها</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل التكليفات واللجان المدرسية</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل النمو المهني للمعلمات والإداريات</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل الميزانية التشغيلية والصندوق المدرسي</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                </tbody>
-            </table>
-
-            <h3 style="margin-top:1.5rem; color:var(--primary-color);">2. وثائق مطلوبة من وكيلة الشؤون التعليمية</h3>
-            <table class="custom-table">
-                <thead><tr><th>الشواهد المطلوبة</th><th>محك التنفيذ</th></tr></thead>
-                <tbody>
-                    <tr><td>متابعة السلوك الوظيفي وسجل الزيارات الصفية</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل متابعة التحضير الإلكتروني وملفات إنجاز المعلمات</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل الأنشطة العلاجية ومتابعة أداء الطالبات</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                </tbody>
-            </table>
-
-            <h3 style="margin-top:1.5rem; color:var(--primary-color);">3. وثائق مطلوبة من وكيلة الشؤون الطلابية ورائدة النشاط</h3>
-            <table class="custom-table">
-                <thead><tr><th>الشواهد المطلوبة</th><th>محك التنفيذ</th></tr></thead>
-                <tbody>
-                    <tr><td>سجل الانضباط المدرسي والمخالفات السلوكية</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل تحدي القراءة ونتائج الاختبارات الوطنية</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل الأنشطة والبرامج والمسابقات (رائدة النشاط)</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                </tbody>
-            </table>
-
-            <h3 style="margin-top:1.5rem; color:var(--primary-color);">4. وثائق مطلوبة من الموجهة الطلابية والشؤون المدرسية</h3>
-            <table class="custom-table">
-                <thead><tr><th>الشواهد المطلوبة</th><th>محك التنفيذ</th></tr></thead>
-                <tbody>
-                    <tr><td>سجل التوجيه والإرشاد والعمل التطوعي</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>سجل تعزيز السلوك الإيجابي ومجالس أولياء الأمور</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                    <tr><td>ملف لجنة الأمن والسلامة وسجل الصيانة (الشؤون المدرسية)</td><td><select class="status-select"><option>نفذ</option><option>جاري العمل</option><option>لم ينفذ</option></select></td></tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- Section 5: Document Analysis 1447H -->
-        <section class="section-container" id="analysis">
-            <h2 class="section-title"><i class="fas fa-search"></i> سجل تحليل الوثائق لعام ١٤٤٧ / ١٤٤٨ هـ</h2>
-            <div style="overflow-x:auto;">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%">م</th>
-                            <th style="width: 65%">المؤشر / متطلب التحليل</th>
-                            <th style="width: 30%">مستوى التحقق</th>
-                        </tr>
-                    </thead>
-                    <tbody id="analysis-body">
-                        <!-- Populated by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <div class="doc-footer" style="text-align:center; padding: 2rem; background: var(--primary-color); color: white; border-radius: 10px; margin-top: 2rem;">
-            <h3 style="color: var(--secondary-color); margin-bottom: 10px;">إعداد واعتماد منصة التقويم الذاتي</h3>
-            <p style="font-size: 1.2rem;">إدارة مدارس الصالحية الأهلية للبنات | إشراف المديرة: فاطمة بنت عبدالله ظافر الأسمري</p>
+        <div class="doc-block">
+          <h4>اجتماع تكليف فريق التقويم المدرسي</h4>
+          <p>
+            <strong>جدول الأعمال:</strong> شرح معنى الاعتماد المدرسي والتقويم
+            الذاتي الخارجي، أهداف الاعتماد المدرسي، متطلبات التقويم، نشر
+            الاستبانات الإلكترونية.
+          </p>
+          <p>
+            <strong>التوصيات:</strong> الاطلاع على الدليل الإجرائي، تكليف فريق
+            العمل وتوزيع المهام، نشر ثقافة التقويم الذاتي بين منسوبات المدرسة
+            والمجتمع المحلي.
+          </p>
         </div>
 
+        <div class="doc-block">
+          <h4>اجتماع الخطة التحسينية</h4>
+          <p>
+            <strong>جدول الأعمال:</strong> قراءة التقرير بتمعن ومراجعة النتائج،
+            وضع خطط لمعالجة أولويات التحسين التي أظهرتها نتائج التقويم.
+          </p>
+          <p>
+            <strong>التوصيات:</strong> إعداد جدول التحسين وفقاً لنتائج التقويم
+            والاعتماد، متابعة تطوير خطة التحسين في ضوء نتائج التقويم الذاتي
+            وتحديد الأولويات.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 2: Tasks & Assignments -->
+      <section class="section-container" id="tasks">
+        <h2 class="section-title">
+          <i class="fas fa-clipboard-list"></i> خطابات التكليف وأدوات التقويم
+        </h2>
+
+        <div class="doc-block">
+          <h4>1. تكليف بإجراء الاستبانات</h4>
+          <p>
+            <strong>المكلفة:</strong>
+            <span
+              class="editable-cell"
+              contenteditable="true"
+              style="display: inline-block; min-width: 200px"
+              >أ. سارة مذحل البقمي</span
+            >
+          </p>
+          <ul>
+            <li>
+              تفعيل أداة الاستبانات في المنصة ونسخ الروابط وإرسالها للمعلمات،
+              والطالبات، وأولياء الأمور.
+            </li>
+            <li>
+              حث المستفيدات على الالتزام بالشفافية والصدق وتوضيح سرية الأسماء.
+            </li>
+            <li>إغلاق الأداة وطباعة الرسوم البيانية.</li>
+          </ul>
+        </div>
+
+        <div class="doc-block">
+          <h4>2. تكليف بأداة الملاحظة الصفية</h4>
+          <p>
+            <strong>المكلفات:</strong>
+            <span
+              class="editable-cell"
+              contenteditable="true"
+              style="display: inline-block; min-width: 300px"
+              >أ. ابتسام البوعبدي، أ. نافعة الحربي، أ. عواطف الذبياني، أ. سارة
+              البقمي</span
+            >
+          </p>
+          <ul>
+            <li>الالتزام بحضور الحصة كاملة وعدم الاكتفاء بجزء منها.</li>
+            <li>التركيز على توفير فرص تعلم متكافئة للطالبات بجميع فئاتهن.</li>
+            <li>ملاحظة جودة التغذية الراجعة وأنواع استراتيجيات التعليم.</li>
+          </ul>
+        </div>
+
+        <div class="doc-block">
+          <h4>3. تكليف بملاحظة البيئة المدرسية</h4>
+          <p>
+            <strong>المكلفة:</strong>
+            <span
+              class="editable-cell"
+              contenteditable="true"
+              style="display: inline-block; min-width: 200px"
+              >أ. عواطف عودة الذبياني</span
+            >
+          </p>
+          <ul>
+            <li>جمع البيانات حول جودة عناصر البيئة المدرسية المادية.</li>
+            <li>
+              التأكد من توافر وسائل الأمن والسلامة، تنظيم الفصول، والمقصف
+              المدرسي.
+            </li>
+          </ul>
+        </div>
+
+        <div class="doc-block">
+          <h4>4. تكليف بإجراء المقابلات وتحليل الوثائق</h4>
+          <p>
+            <strong>المكلفات:</strong>
+            <span
+              class="editable-cell"
+              contenteditable="true"
+              style="display: inline-block; min-width: 300px"
+              >أ. ابتسام البوعبدي، أ. نافعة الحربي، أ. عواطف الذبياني، أ. سارة
+              البقمي</span
+            >
+          </p>
+          <ul>
+            <li>
+              إجراء المقابلات مع (المديرة، الموجهة الطلابية، المعلمات، الطالبات)
+              لإدارة وقت المقابلات وتدوين الإجابات.
+            </li>
+            <li>
+              الاطلاع على الوثائق الأساسية (الخطة التشغيلية، خطط التطوير المهني،
+              خطة الأمن والسلامة، عينة من ملفات الإنجاز).
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 3: Action Plan -->
+      <section class="section-container" id="plan">
+        <h2 class="section-title">
+          <i class="fas fa-calendar-check"></i> خطة العمل الإجرائية في تنفيذ
+          التقويم
+        </h2>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>المهام والإجراءات</th>
+              <th>الجهة المنفذة</th>
+              <th>حالة التنفيذ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                الاطلاع على أدلة التقويم وعقد الاجتماع الأول وتوزيع المهام
+              </td>
+              <td>إدارة المدرسة وفريق التقويم</td>
+              <td>
+                <select class="status-select">
+                  <option value="نفذ" selected>نفذ</option>
+                  <option value="لم ينفذ">لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                التوعية ونشر ثقافة التقويم الذاتي (لقاء المعلمات والطالبات
+                وأولياء الأمور)
+              </td>
+              <td>مديرة المدرسة والوكيلات</td>
+              <td>
+                <select class="status-select">
+                  <option value="نفذ" selected>نفذ</option>
+                  <option value="لم ينفذ">لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>التسجيل في المنصة وإدراج فريق التقويم وإرسال الطلب</td>
+              <td>مديرة المدرسة</td>
+              <td>
+                <select class="status-select">
+                  <option value="نفذ" selected>نفذ</option>
+                  <option value="لم ينفذ">لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                تفعيل أداة الاستبانات، الملاحظة الصفية، والبيئة المدرسية
+                والمقابلات
+              </td>
+              <td>عضوات الفريق المكلفات</td>
+              <td>
+                <select class="status-select">
+                  <option value="نفذ" selected>نفذ</option>
+                  <option value="لم ينفذ">لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>إغلاق التقويم الذاتي في المنصة</td>
+              <td>مديرة المدرسة</td>
+              <td>
+                <select class="status-select">
+                  <option value="نفذ" selected>نفذ</option>
+                  <option value="لم ينفذ">لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section 4: Evidences by Role -->
+      <section class="section-container" id="evidences">
+        <h2 class="section-title">
+          <i class="fas fa-folder-open"></i> الشواهد المطلوبة من فريق التقويم
+          (حسب الوصف الوظيفي)
+        </h2>
+
+        <h3 style="margin-top: 1rem; color: var(--primary-color)">
+          1. وثائق مطلوبة من مديرة المدرسة
+        </h3>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>الشواهد المطلوبة</th>
+              <th>محك التنفيذ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>سجل الخطة التشغيلية وتطويرها</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل التكليفات واللجان المدرسية</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل النمو المهني للمعلمات والإداريات</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل الميزانية التشغيلية والصندوق المدرسي</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 1.5rem; color: var(--primary-color)">
+          2. وثائق مطلوبة من وكيلة الشؤون التعليمية
+        </h3>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>الشواهد المطلوبة</th>
+              <th>محك التنفيذ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>متابعة السلوك الوظيفي وسجل الزيارات الصفية</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل متابعة التحضير الإلكتروني وملفات إنجاز المعلمات</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل الأنشطة العلاجية ومتابعة أداء الطالبات</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 1.5rem; color: var(--primary-color)">
+          3. وثائق مطلوبة من وكيلة الشؤون الطلابية ورائدة النشاط
+        </h3>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>الشواهد المطلوبة</th>
+              <th>محك التنفيذ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>سجل الانضباط المدرسي والمخالفات السلوكية</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل تحدي القراءة ونتائج الاختبارات الوطنية</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل الأنشطة والبرامج والمسابقات (رائدة النشاط)</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 1.5rem; color: var(--primary-color)">
+          4. وثائق مطلوبة من الموجهة الطلابية والشؤون المدرسية
+        </h3>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>الشواهد المطلوبة</th>
+              <th>محك التنفيذ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>سجل التوجيه والإرشاد والعمل التطوعي</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>سجل تعزيز السلوك الإيجابي ومجالس أولياء الأمور</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>ملف لجنة الأمن والسلامة وسجل الصيانة (الشؤون المدرسية)</td>
+              <td>
+                <select class="status-select">
+                  <option>نفذ</option>
+                  <option>جاري العمل</option>
+                  <option>لم ينفذ</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section 5: Document Analysis 1447H -->
+      <section class="section-container" id="analysis">
+        <h2 class="section-title">
+          <i class="fas fa-search"></i> سجل تحليل الوثائق لعام ١٤٤٧ / ١٤٤٨ هـ
+        </h2>
+        <div style="overflow-x: auto">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th style="width: 5%">م</th>
+                <th style="width: 65%">المؤشر / متطلب التحليل</th>
+                <th style="width: 30%">مستوى التحقق</th>
+              </tr>
+            </thead>
+            <tbody id="analysis-body">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <div
+        class="doc-footer"
+        style="
+          text-align: center;
+          padding: 2rem;
+          background: var(--primary-color);
+          color: white;
+          border-radius: 10px;
+          margin-top: 2rem;
+        "
+      >
+        <h3 style="color: var(--secondary-color); margin-bottom: 10px">
+          إعداد واعتماد منصة التقويم الذاتي
+        </h3>
+        <p style="font-size: 1.2rem">
+          إدارة مدارس النصر الأهلية | إشراف المدير: أحمد فايز الزهراني
+        </p>
+      </div>
     </main>
 
     <script>
-        // Smooth scroll for sidebar links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-                this.classList.add('active');
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
+      // Smooth scroll for sidebar links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document
+            .querySelectorAll(".nav-links a")
+            .forEach((a) => a.classList.remove("active"));
+          this.classList.add("active");
+          document
+            .querySelector(this.getAttribute("href"))
+            .scrollIntoView({ behavior: "smooth" });
         });
+      });
 
-        // Toggle Signature
-        function toggleSign(btn) {
-            if (btn.classList.contains('signed')) {
-                btn.classList.remove('signed');
-                btn.innerHTML = '<i class="fas fa-pen-nib"></i> توقيع';
-            } else {
-                btn.classList.add('signed');
-                const date = new Date().toLocaleDateString('ar-SA');
-                btn.innerHTML = '<i class="fas fa-check"></i> تم التوقيع <br><small>'+date+'</small>';
-            }
+      // Toggle Signature
+      function toggleSign(btn) {
+        if (btn.classList.contains("signed")) {
+          btn.classList.remove("signed");
+          btn.innerHTML = '<i class="fas fa-pen-nib"></i> توقيع';
+        } else {
+          btn.classList.add("signed");
+          const date = new Date().toLocaleDateString("ar-SA");
+          btn.innerHTML =
+            '<i class="fas fa-check"></i> تم التوقيع <br><small>' +
+            date +
+            "</small>";
         }
+      }
 
-        // Generate Analysis Rows
-        const analysisData = [
-            "يوجد لدى المدرسة خطة تشغيلية شاملة وفق أهداف تطويرية محددة.",
-            "تتابع المدرسة تنفيذ البرامج والأنشطة، وتقومها وفق الخطة الزمنية.",
-            "تطور المدرسة خطتها التشغيلية وفق نتائج التقويم المدرسي، وخطة التحسين.",
-            "تنفّذ المدرسة برامج وأنشطة لتعزيز القيم الإسلامية، والهوية الوطنية لدى الطالبات.",
-            "تطبق المدرسة قيم مهنة التعليم وأخلاقياتها في التعامل مع منسوباتها.",
-            "تنفذ المدرسة برامج وقائية وعلاجية للمشكلات السلوكية التي تواجه الطالبات وتتابعها.",
-            "تنفذ المدرسة برامج إثرائية لتطوير مواهب الطالبات، وتهيئهن للمستقبل.",
-            "تنفذ المدرسة أنشطة للتوعية بدور الأسرة في دعم تعلم الطالبات.",
-            "تعزز المدرسة الشراكة المجتمعية لدعم التعلم وتلبية احتياجات جميع الطالبات.",
-            "يتوافر كادر تعليمي (معلمات) مكتمل ومؤهل.",
-            "يتوافق مجال التخصص في المؤهل العلمي للمعلمات مع المهام الموكلة لهن.",
-            "يتوفر كادر إداري (إداريات) مكتمل للقيام بالمهام الإدارية.",
-            "يتوافق مؤهل وخبرة الكادر الإداري مع المهام الموكلة لهن.",
-            "توفر المدرسة تقريرًا ماليا معتمدًا يوضح الملاءة المالية.",
-            "تطبق المدرسة إجراءات محددة؛ لدعم الحصول على الرخص المهنية للمعلمات.",
-            "تبني المدرسة خطة التطوير المهني وفق نتائج التقويم واحتياجات المنسوبات.",
-            "توفر المدرسة بيانات سجلية دقيقة وموثوقة تتسق مع الواقع الفعلي.",
-            "تطبق المدرسة إجراءات التقويم الذاتي وأدواته وفقًا للأدلة المعتمدة.",
-            "تحلل المدرسة نتائج التقويم المدرسي لبناء خطة شاملة للتحسين.",
-            "تطبق المدرسة إجراءات واضحة للمحافظة على حقوق الطالبات وحمايتهن.",
-            "تطبق المدرسة برامج تضمن مناخًا آمنا للتعلم وتحد من حالات التنمر.",
-            "تتابع المدرسة تنفيذ المناهج لتحقيق نواتج التعلم المعرفية والمهارية.",
-            "تطبق المدرسة أساليب تقويم متنوعة لتحديد مستويات أداء الطالبات.",
-            "تحلل المدرسة نتائج تقويم أداء الطالبات لبناء خطط علاجية وإثرائية.",
-            "تقدم المدرسة تغذية راجعة للطالبات وتتابع تقدمهن بشكل مستمر.",
-            "تشارك الطالبات في أعمال تطوعية تخدم المجتمع.",
-            "تلتزم الطالبات بقواعد السلوك والانضباط المدرسي.",
-            "توفر المدرسة شهادة مطابقة المبنى للمواصفات والاشتراطات.",
-            "يوجد لدى المدرسة شهادة الأمن والسلامة من الدفاع المدني سارية المفعول."
-        ];
+      // Generate Analysis Rows
+      const analysisData = [
+        "يوجد لدى المدرسة خطة تشغيلية شاملة وفق أهداف تطويرية محددة.",
+        "تتابع المدرسة تنفيذ البرامج والأنشطة، وتقومها وفق الخطة الزمنية.",
+        "تطور المدرسة خطتها التشغيلية وفق نتائج التقويم المدرسي، وخطة التحسين.",
+        "تنفّذ المدرسة برامج وأنشطة لتعزيز القيم الإسلامية، والهوية الوطنية لدى الطالبات.",
+        "تطبق المدرسة قيم مهنة التعليم وأخلاقياتها في التعامل مع منسوباتها.",
+        "تنفذ المدرسة برامج وقائية وعلاجية للمشكلات السلوكية التي تواجه الطالبات وتتابعها.",
+        "تنفذ المدرسة برامج إثرائية لتطوير مواهب الطالبات، وتهيئهن للمستقبل.",
+        "تنفذ المدرسة أنشطة للتوعية بدور الأسرة في دعم تعلم الطالبات.",
+        "تعزز المدرسة الشراكة المجتمعية لدعم التعلم وتلبية احتياجات جميع الطالبات.",
+        "يتوافر كادر تعليمي (معلمات) مكتمل ومؤهل.",
+        "يتوافق مجال التخصص في المؤهل العلمي للمعلمات مع المهام الموكلة لهن.",
+        "يتوفر كادر إداري (إداريات) مكتمل للقيام بالمهام الإدارية.",
+        "يتوافق مؤهل وخبرة الكادر الإداري مع المهام الموكلة لهن.",
+        "توفر المدرسة تقريرًا ماليا معتمدًا يوضح الملاءة المالية.",
+        "تطبق المدرسة إجراءات محددة؛ لدعم الحصول على الرخص المهنية للمعلمات.",
+        "تبني المدرسة خطة التطوير المهني وفق نتائج التقويم واحتياجات المنسوبات.",
+        "توفر المدرسة بيانات سجلية دقيقة وموثوقة تتسق مع الواقع الفعلي.",
+        "تطبق المدرسة إجراءات التقويم الذاتي وأدواته وفقًا للأدلة المعتمدة.",
+        "تحلل المدرسة نتائج التقويم المدرسي لبناء خطة شاملة للتحسين.",
+        "تطبق المدرسة إجراءات واضحة للمحافظة على حقوق الطالبات وحمايتهن.",
+        "تطبق المدرسة برامج تضمن مناخًا آمنا للتعلم وتحد من حالات التنمر.",
+        "تتابع المدرسة تنفيذ المناهج لتحقيق نواتج التعلم المعرفية والمهارية.",
+        "تطبق المدرسة أساليب تقويم متنوعة لتحديد مستويات أداء الطالبات.",
+        "تحلل المدرسة نتائج تقويم أداء الطالبات لبناء خطط علاجية وإثرائية.",
+        "تقدم المدرسة تغذية راجعة للطالبات وتتابع تقدمهن بشكل مستمر.",
+        "تشارك الطالبات في أعمال تطوعية تخدم المجتمع.",
+        "تلتزم الطالبات بقواعد السلوك والانضباط المدرسي.",
+        "توفر المدرسة شهادة مطابقة المبنى للمواصفات والاشتراطات.",
+        "يوجد لدى المدرسة شهادة الأمن والسلامة من الدفاع المدني سارية المفعول.",
+      ];
 
-        const tbody = document.getElementById('analysis-body');
-        let rowsHtml = '';
-        analysisData.forEach((item, index) => {
-            rowsHtml += `
+      const tbody = document.getElementById("analysis-body");
+      let rowsHtml = "";
+      analysisData.forEach((item, index) => {
+        rowsHtml += `
                 <tr>
                     <td>${index + 1}</td>
                     <td>${item}</td>
@@ -487,8 +1018,8 @@
                     </td>
                 </tr>
             `;
-        });
-        tbody.innerHTML = rowsHtml;
+      });
+      tbody.innerHTML = rowsHtml;
     </script>
-</body>
+  </body>
 </html>
